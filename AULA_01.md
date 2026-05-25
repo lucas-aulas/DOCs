@@ -1,12 +1,30 @@
 <h1 align="center">1. Preparação do Ambiente</h1>
 
-### Ativar ambiente virtual PythonLinux / macOS
+### Ativar ambiente virtual
 
-| Sistema | Comandos |
-|---|---|
-| Linux/macOS | `python3.14 -m venv .venv`<br>`source .venv/bin/activate`<br>`pip install --upgrade pip`<br>`pip install -r requirements.txt` |
-| Windows (CMD) | `python -m venv .venv`<br>`.venv\Scripts\activate.bat`<br>`python -m pip install --upgrade pip`<br>`python -m pip install -r requirements.txt` |
-| Windows (PowerShell) | `python -m venv .venv`<br>`.venv\Scripts\Activate.ps1`<br>`python -m pip install --upgrade pip`<br>`python -m pip install -r requirements.txt` |
+Linux/macOS
+```sh
+python3.14 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+Windows (CMD)
+```bash
+python -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Windows (PowerShell) (Recomendado)
+```bash
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
 > [!NOTE]
 > Instalação separada (sem usar `requirements.txt`)
@@ -28,6 +46,22 @@
 > Resolva:
 > ```py
 > pip install BIBLIOTECA_X
+> ```
+
+> [!TIP]
+> Limpar tudo do Ambiente Virtual
+> 
+> Limpar Cache do PIP
+> ```py
+> pip cache purge
+> ```
+> Desinstalar tudo que já foi instalado no VENV
+> ```py
+> # Linux
+> pip freeze > req_installed.txt && pip uninstall -r req_installed.txt -y && pip cache purge
+> 
+> # Windows (PowerShell)
+> pip freeze > req_installed.txt; pip uninstall -r req_installed.txt -y; pip cache purge
 > ```
 
 
