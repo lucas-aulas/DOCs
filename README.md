@@ -221,7 +221,7 @@ df_tmd_ratings_small = pd.read_csv(f"{dataset_movies_url}/The_Movies_Dataset/tmd
 
 Executa uma consulta SQL no BigQuery e retorna os dados em DataFrame.
 
-![alt text](image-14.png)
+![](assets/image-14.png)
 
 ```py
 df = my_gcp_client.query(
