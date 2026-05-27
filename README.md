@@ -1,4 +1,5 @@
-<h1 align="center">1. Preparação do Ambiente</h1>
+<h1 align="center">1. PREPARAÇÃO DO AMBIENTE</h1>
+<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
 
 ### `requirements.txt`
 
@@ -103,8 +104,10 @@ tmdbsimple              # Cliente Python simples para consumir a API do The Movi
 - Python (Microsoft)
 - Pylance (Microsoft)
 - Pylint (Microsoft)
+</details>
 
-<h1 align="center">2. Configuração do BigQuery</h1>
+<h1 align="center">2. CONFIGURAÇÃO DO BIGQUERY</h1>
+<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
 
 ### 1. Criar Projeto no GCP
 
@@ -137,7 +140,10 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 ![](assets/image-11.png)
 ![](assets/image-12.png)
 
-<h1 align="center">· • CÓDIGO • ·</h1>
+</details>
+
+<h1 align="center">3. CÓDIGO</h1>
+<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
 
 ### Imports
 
@@ -279,16 +285,11 @@ my_gcp_client.load_table_from_dataframe(df, "dataset.table_name")
 # Ex:
 my_gcp_client.load_table_from_dataframe(df_boxoffice_dc_marvel, "bronze.boxoffice_dc_marvel")
 ```
+</details>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1 align="center">EXTRAS</h1>
 
-<h1 align="center">Extras</h1>
-<details> <summary align="center"><b>Veja aqui...</b></summary>
+<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
 
 <h2 align="left">The Movie Database (TMDB)</h2>
 
