@@ -287,58 +287,47 @@ my_gcp_client.load_table_from_dataframe(df_boxoffice_dc_marvel, "bronze.boxoffic
 <br>
 <br>
 
-<h1 align="center">· • Extras • ·</h1>
+<h1 align="center">Extras</h1>
+<details> <summary align="center"><b>Veja aqui...</b></summary>
 
-<h2 align="center">The Movie Database (TMDB)</h2>
+<h2 align="left">The Movie Database (TMDB)</h2>
 
-### Conta + Chave da API
+- Crie e configure o acesso à API do TMDB
+    - 1º Criar conta: https://themoviedb.org/signup
+    - 2º Solicitar chave da API: https://themoviedb.org/settings/api/request
+    - 3º Configurações da API: https://themoviedb.org/settings/api
 
-Cria e configura o acesso à API do TMDB.
+> [!NOTE]
+> Leia a documentação: https://pypi.org/project/tmdbsimple
 
-| | |
-|-|-|
-1º Criar conta            | https://themoviedb.org/signup
-2º Solicitar chave da API | https://themoviedb.org/settings/api/request
-3º Configurações da API   | https://themoviedb.org/settings/api
+1. Define a chave de autenticação da API do TMDB.
+    ```py
+    import tmdbsimple as tmdb
 
-### Configuração da API
+    tmdb_api_key = "_____"
+    tmdb.API_KEY = tmdb_api_key
+    ```
+2. Busca informações de filmes no TMDB.
+    ```py
+    tmdb_movies = tmdb.Search().movie(query="Spider-Man 2")
 
-Define a chave de autenticação da API do TMDB.
+    tmdb_data = tmdb_movies.get("results")
 
-```py
-tmdb_api_key = "_____"
-tmdb.API_KEY = tmdb_api_key
-```
+    pd.DataFrame(data=tmdb_data)
+    ```
+3. Busca o ID de uma pessoa/artista no TMDB.
+    ```py
+    star_id = tmdb.Search().person(query="Tony Ramos").get("results")[0].get("id")
+    ```
+4. Obtém redes sociais cadastradas de uma pessoa no TMDB.
+    ```py
+    tmdb.People(star_id).external_ids().get("instagram_id")
+    ```
 
-### Filme
+<h2 align="left">Igmapper</h2>
 
-Busca informações de filmes no TMDB.
-
-```py
-tmdb_movies = tmdb.Search().movie(query="Spider-Man 2")
-
-pd.DataFrame(data=tmdb_movies.get("results"))
-```
-
-### Elenco
-
-Busca o ID de uma pessoa/artista no TMDB.
-
-```py
-star_id = tmdb.Search().person(query="Tony Ramos").get("results")[0].get("id")
-```
-
-### Redes Sociais
-
-Obtém redes sociais cadastradas de uma pessoa no TMDB.
-
-```py
-tmdb.People(star_id).external_ids().get("instagram_id")
-```
-
-<h2 align="center">Igmapper</h2>
-
-### Configuração do Client
+> [!NOTE]
+> Leia a documentação: https://pypi.org/project/igmapper
 
 1. Configura o cliente de acesso ao Instagram via Igmapper.
     ```py
@@ -360,9 +349,4 @@ tmdb.People(star_id).external_ids().get("instagram_id")
     client.get_feed("therock")
     ```
 
-<br>
-<br>
-<hr>
-<hr>
-<br>
-<br>
+</details>
