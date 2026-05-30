@@ -290,12 +290,10 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     ```py
     df_complete_dc_marvel.sort_values(by="RATING_IMDB", ascending=False).head(2)
     ```
-
 9. Tratamento das colunas monetárias, percentuais, datas e inteiros
     ```py
     df_tratado = df_complete_dc_marvel.copy()
     ```
-
     ```py
     money_cols = [
         "BOX_OFFICE_GROSS_OTHER_TERRITORIES",
@@ -308,29 +306,20 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     ]
 
     for col in money_cols:
-        df_tratado[col] = (
-            df_tratado[col].astype(str).str.replace("$", "").str.replace(",", "").replace("None", 0).astype(float)
-        )
+        df_tratado[col] = df_tratado[col].astype(str).str.replace("$", "").str.replace(",", "").replace("None", 0).astype(float)
     ```
-
     ```py
     percent_cols = ["DOMESTIC"]
 
     for col in percent_cols:
-        df_tratado[col] = (
-            df_tratado[col].astype(str).str.replace("%", "").astype(float)
-        )
+        df_tratado[col] = df_tratado[col].astype(str).str.replace("%", "").astype(float)
     ```
-
     ```py
     date_cols = ["US_RELEASE_DATE"]
 
     for col in date_cols:
-        df_tratado[col] = pd.to_datetime(
-            df_tratado[col], format="%d/%m/%Y"
-        )
+        df_tratado[col] = pd.to_datetime(df_tratado[col], format="%d/%m/%Y")
     ```
-
     ```py
     int_cols = [
         "VOTE",
@@ -341,48 +330,28 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     ]
 
     for col in int_cols:
-        df_tratado[col] = (
-            df_tratado[col].fillna(0).astype(int)
-        )
+        df_tratado[col] = df_tratado[col].fillna(0).astype(int)
     ```
-
 10. Criando a coluna de ano baseada na data de lançamento
     ```py
-    df_tratado["YEAR"] = (
-        df_tratado["US_RELEASE_DATE"].dt.year
-    )
+    df_tratado["YEAR"] = df_tratado["US_RELEASE_DATE"].dt.year
     ```
-
 11. Padronizando colunas categóricas
     ```py
-    df_tratado["GENRE"] = (
-        df_tratado["GENRE"].str.split(",").str[0].str.strip()
-    )
+    df_tratado["GENRE"] = df_tratado["GENRE"].str.split(",").str[0].str.strip()
 
-    df_tratado["COUNTRY_ORIGIN"] = (
-        df_tratado["COUNTRY_ORIGIN"].str.split(",").str[0].str.strip()
-    )
+    df_tratado["COUNTRY_ORIGIN"] = df_tratado["COUNTRY_ORIGIN"].str.split(",").str[0].str.strip()
 
-    df_tratado["LANGUAGE"] = (
-        df_tratado["LANGUAGE"].str.split(",").str[0].str.strip()
-    )
+    df_tratado["LANGUAGE"] = df_tratado["LANGUAGE"].str.split(",").str[0].str.strip()
 
-    df_tratado["PRODUCTION_COMPANY"] = (
-        df_tratado["PRODUCTION_COMPANY"].str.split(",").str[0].str.strip()
-    )
+    df_tratado["PRODUCTION_COMPANY"] = df_tratado["PRODUCTION_COMPANY"].str.split(",").str[0].str.strip()
     ```
-
 12. Organização final das colunas
     ```py
-    df_tratado = df_tratado.drop(
-        columns=["Unnamed: 0"], errors="ignore"
-    )
+    df_tratado = df_tratado.drop(columns=["Unnamed: 0"], errors="ignore")
 
-    df_tratado = df_tratado[
-        sorted(df_tratado.columns)
-    ]
+    df_tratado = df_tratado[sorted(df_tratado.columns)]
     ```
-
 13. Salvando a tabela tratada na camada Silver
     ```py
     df_tratado.to_gbq(
@@ -409,7 +378,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     pd.set_option("display.max_columns", None)
     pd.set_option("display.max_rows", 10)
     ```
-
 2. Configuração das credenciais e criação do cliente de conexão com o Google BigQuery.
     ```py
     gcp_service_acc_file_aluno = "../secrets/____________________.json"
@@ -417,14 +385,12 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     my_gcp_cred = service_account.Credentials.from_service_account_file(gcp_service_acc_file_aluno)
     my_gcp_client = bigquery.Client(credentials=my_gcp_cred)
     ```
-
 3. Leitura da tabela Silver armazenada no BigQuery para criação da camada Gold.
     ```py
     df_silver = my_gcp_client.query(
         f"SELECT * FROM silver.complete_dc_marvel",
     ).to_dataframe(create_bqstorage_client=False)
     ```
-
 4. Criação da dimensão de filmes contendo atributos descritivos de cada produção.
     ```py
     dim_film = (
@@ -438,7 +404,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
     dim_film.head(5)
     ```
-
 5. Criação da dimensão de equipe técnica contendo diretor, roteirista e ator principal.
     ```py
     dim_staff = (
@@ -452,7 +417,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
     dim_staff.head(2)
     ```
-
 6. Criação da dimensão de franquias e famílias de personagens dos filmes.
     ```py
     dim_franchise = (
@@ -466,7 +430,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
     dim_franchise.head(2)
     ```
-
 7. Criação da dimensão de produção contendo empresa produtora, distribuidora e localização das filmagens.
     ```py
     dim_production = (
@@ -480,7 +443,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
     dim_production.head(2)
     ```
-
 8. Criação da dimensão de datas com informações de ano, mês e trimestre de lançamento.
     ```py
     dim_date = df_silver[["US_RELEASE_DATE"]].dropna().drop_duplicates().sort_values(by="US_RELEASE_DATE").reset_index(drop=True)
@@ -493,12 +455,10 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
     dim_date.head(2)
     ```
-
 9. Criação inicial da tabela fato a partir dos dados completos da camada Silver.
     ```py
     fact_movies = df_silver.copy()
     ```
-
 10. Associação da dimensão de filmes à tabela fato por meio das chaves correspondentes.
     ```py
     fact_movies = fact_movies.merge(
@@ -507,7 +467,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         how="left",
     )
     ```
-
 11. Associação da dimensão de equipe técnica à tabela fato.
     ```py
     fact_movies = fact_movies.merge(
@@ -516,7 +475,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         how="left",
     )
     ```
-
 12. Associação da dimensão de franquias à tabela fato.
     ```py
     fact_movies = fact_movies.merge(
@@ -525,7 +483,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         how="left",
     )
     ```
-
 13. Associação da dimensão de produção à tabela fato.
     ```py
     fact_movies = fact_movies.merge(
@@ -534,7 +491,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         how="left",
     )
     ```
-
 14. Associação da dimensão de datas à tabela fato utilizando a data de lançamento.
     ```py
     fact_movies = fact_movies.merge(
@@ -543,7 +499,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         how="left",
     )
     ```
-
 15. Seleção final das chaves dimensionais e métricas numéricas da tabela fato.
     ```py
     fact_movies = fact_movies[
@@ -558,12 +513,10 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
         ]
     ]
     ```
-
 16. Visualização inicial da tabela fato já estruturada no modelo Star Schema.
     ```py
     fact_movies.head(3)
     ```
-
 17. Envio das tabelas dimensionais e fato para a camada Gold no BigQuery.
     ```py
     minhas_tabelas = {
@@ -585,7 +538,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
             credentials=my_gcp_cred,
         )
     ```
-
 18. Definição das chaves primárias das tabelas dimensionais no BigQuery.
     ```sql
     ALTER TABLE gold.dim_date ADD PRIMARY KEY (ID_DATE)
@@ -603,7 +555,6 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
     ALTER TABLE gold.dim_staff ADD PRIMARY KEY (ID_STAFF)
     NOT ENFORCED;
     ```
-
 19. Criação das chaves estrangeiras da tabela fato para garantir o relacionamento com as dimensões.
     ```sql
     ALTER TABLE gold.fact_movies ADD CONSTRAINT fk_date 
