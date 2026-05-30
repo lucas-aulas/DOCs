@@ -1,3 +1,11 @@
+<div align="center">
+    <hr>
+    <h1>
+        Engenharia de Dados <br> da Ingestão à modelagem <br> Star Schema <br> com Python e SQL
+    </h1>
+</div>
+
+
 - **Sumário**
     - [1. PREPARAÇÃO DO AMBIENTE](#1-preparação-do-ambiente)
     - [2. CONFIGURAÇÃO DO BIGQUERY](#3-código--ingestão)
@@ -8,9 +16,9 @@
 
 <div align="center"> 
 
-# 1. PREPARAÇÃO DO AMBIENTE
+## 1. PREPARAÇÃO DO AMBIENTE
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 ### `requirements.txt`
 
@@ -119,9 +127,9 @@ tmdbsimple            # Cliente Python simples para consumir a API do The Movie 
 
 <div align="center"> 
 
-# 2. CONFIGURAÇÃO DO BIGQUERY
+## 2. CONFIGURAÇÃO DO BIGQUERY
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 ### Criar Projeto no GCP
 
@@ -163,9 +171,9 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
 <div align="center"> 
 
-# 3. CÓDIGO · Ingestão
+## 3. CÓDIGO · Ingestão
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 1. Import e definição das view com pandas
     ```py
@@ -217,9 +225,9 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
 <div align="center"> 
 
-# 4. CÓDIGO · Tratamento
+## 4. CÓDIGO · Tratamento
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 1. Bibliotecas que vão ser utilizadas
     ```py
@@ -365,9 +373,9 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
 <div align="center"> 
 
-# 5. CÓDIGO · Star Schema
+## 5. CÓDIGO · Star Schema
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 1. Importação das bibliotecas necessárias para conexão com o BigQuery e manipulação dos dados com Pandas.
     ```py
@@ -582,9 +590,9 @@ Cria uma conta de serviço para autenticar o acesso ao BigQuery.
 
 <div align="center"> 
 
-# Extras
+## Extras
 </div>
-<details><summary><b>ℹ️ Clique para ver os detalhes</b></summary>
+<details><summary>ℹ️ Detalhes...</summary>
 
 <h2 align="left">The Movie Database (TMDB)</h2>
 
